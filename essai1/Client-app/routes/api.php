@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\TvaController;
+use App\Http\Controllers\VilleController;
 use App\Models\Tva;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('clients', ClientController::class);
 Route::apiResource('tva', TvaController::class);
+Route::apiResource('ville', VilleController::class);
