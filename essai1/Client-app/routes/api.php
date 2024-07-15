@@ -4,7 +4,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\TvaController;
 use App\Http\Controllers\VilleController;
-use App\Models\Tva;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\FactureController;
+use App\Http\Controllers\LignefactureController;
+use App\Http\Controllers\ReglementController;
+use App\Http\Controllers\SecteurController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +26,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+Route::get('/lastReglementId', [ReglementController::class, 'getLastReglementId']);
+Route::apiResource('reglements', ReglementController::class);
 Route::apiResource('clients', ClientController::class);
+Route::apiResource('factures', FactureController::class);
+Route::get('/lastFactureId', [FactureController::class, 'getLastFactureId']);
+Route::apiResource('ligne_facture', LignefactureController::class);
 Route::apiResource('tva', TvaController::class);
 Route::apiResource('ville', VilleController::class);
+Route::apiResource('article', ArticleController::class);
+Route::apiResource('secteur', SecteurController::class);
