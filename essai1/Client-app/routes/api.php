@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\TvaController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\FactureController;
 use App\Http\Controllers\LignefactureController;
 use App\Http\Controllers\ReglementController;
 use App\Http\Controllers\SecteurController;
+use App\Http\Controllers\AuthController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +24,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/facture/{facture_id}/lignes', 'App\Http\Controllers\LigneFactureController@getLignesByFactureId');
+
 Route::get('/lastReglementId', [ReglementController::class, 'getLastReglementId']);
 Route::apiResource('reglements', ReglementController::class);
 Route::apiResource('clients', ClientController::class);
@@ -36,3 +44,5 @@ Route::apiResource('tva', TvaController::class);
 Route::apiResource('ville', VilleController::class);
 Route::apiResource('article', ArticleController::class);
 Route::apiResource('secteur', SecteurController::class);
+
+

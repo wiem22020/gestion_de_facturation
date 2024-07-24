@@ -62,6 +62,8 @@ class FactureController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Facture::destroy($id);
+
+        return response()->json(['message' => 'Facture deleted successfully'], 204);
     }
 }

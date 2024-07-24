@@ -9,6 +9,11 @@ use App\Models\LigneFacture;
 
 class LignefactureController extends Controller
 {
+    public function getLignesByFactureId($facture_id)
+    {
+        $lignesFacture = LigneFacture::where('facture_id', $facture_id)->get();
+        return response()->json($lignesFacture);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -74,6 +79,8 @@ class LignefactureController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        LigneFacture::destroy($id);
+
+        return response()->json(['message' => 'ligne facture     deleted successfully'], 204);
     }
 }
